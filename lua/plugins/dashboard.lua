@@ -6,8 +6,12 @@ return {
     keys = {
       { "<c-/>", function() Snacks.terminal() end, desc = "Terminal", mode = { "n", "t" } },
       { "<c-_>", function() Snacks.terminal() end, desc = "which_key_ignore", mode = { "n", "t" } },
+      { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+      { "<leader>gG", function() Snacks.lazygit({ cwd = vim.fn.getcwd() }) end, desc = "Lazygit (cwd)" },
     },
     opts = {
+      lazygit = { enabled = true },
+      statuscolumn = { enabled = true },
       terminal = {
         shell = "powershell",
         win = {

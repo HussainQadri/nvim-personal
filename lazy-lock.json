@@ -3,6 +3,7 @@
   "cmake-tools.nvim": { "branch": "master", "commit": "e100f40b117381dadf42a34b0718f8e4350715b2" },
   "conform.nvim": { "branch": "master", "commit": "086a40dc7ed8242c03be9f47fbcee68699cc2395" },
   "friendly-snippets": { "branch": "main", "commit": "6cd7280adead7f586db6fccbd15d2cac7e2188b9" },
+  "gitsigns.nvim": { "branch": "main", "commit": "4ed47e8c4c66c921dc1d6643977e0526e1f44396" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lualine.nvim": { "branch": "master", "commit": "8811f3f3f4dc09d740c67e9ce399e7a541e2e5b2" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "25f609e7fca78af7cede4f9fa3af8a94b1c4950b" },

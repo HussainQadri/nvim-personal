@@ -10,6 +10,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.equalalways = false
 vim.opt.signcolumn = "yes"
+vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 vim.opt.termguicolors = true
 vim.opt.undofile = true
 vim.opt.smartcase = true
