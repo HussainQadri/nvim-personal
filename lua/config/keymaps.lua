@@ -40,15 +40,6 @@ map("n", "<leader>rt", function()
   get_runner():toggle()
 end, { desc = "toggle runner terminal" })
 
-map("n", "<leader>e", function()
-  vim.cmd("Neotree toggle")
-  local ok, dap = pcall(require, "dap")
-  if ok and dap.session() then
-    vim.schedule(function()
-      require("dapui").open({ reset = true })
-    end)
-  end
-end, { desc = "explorer" })
 
 -- better up/down (wrapping-aware)
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })

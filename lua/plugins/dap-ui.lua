@@ -3,7 +3,6 @@ return {
   dependencies = {
     "mfussenegger/nvim-dap",
     "nvim-neotest/nvim-nio",
-    "nvim-neo-tree/neo-tree.nvim",
   },
   keys = {
     { "<leader>du", function() require("dapui").toggle() end, desc = "debug: toggle ui" },
@@ -15,12 +14,13 @@ return {
   config = function()
     local dap = require("dap")
     local dapui = require("dapui")
-    local events = require("neo-tree.events")
 
     vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "Error" })
     vim.fn.sign_define("DapStopped", { text = "▶", texthl = "String" })
 
     dapui.setup({
+      floating = { border = "rounded" },
+      render = { indent = 1 },
       layouts = {
         {
           elements = {
@@ -53,21 +53,5 @@ return {
     dap.listeners.before.event_exited["dapui_config"] = function()
       dapui.close()
     end
-
-    local function reset_dapui_if_debugging()
-      if dap.session() then
-        dapui.open({ reset = true })
-      end
-    end
-
-    events.subscribe({
-      event = events.NEO_TREE_WINDOW_AFTER_OPEN,
-      handler = reset_dapui_if_debugging,
-    })
-
-    events.subscribe({
-      event = events.NEO_TREE_WINDOW_AFTER_CLOSE,
-      handler = reset_dapui_if_debugging,
-    })
   end,
 }

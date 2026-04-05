@@ -7,9 +7,9 @@ return {
       options = {
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
+        globalstatus = true,
         disabled_filetypes = {
           statusline = { "snacks_dashboard" },
-          winbar = { "snacks_dashboard" },
         },
       },
       sections = {

@@ -8,8 +8,12 @@ return {
       { "<c-_>", function() Snacks.terminal() end, desc = "which_key_ignore", mode = { "n", "t" } },
       { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
       { "<leader>gG", function() Snacks.lazygit({ cwd = vim.fn.getcwd() }) end, desc = "Lazygit (cwd)" },
+      { "<leader>e", function() Snacks.explorer() end, desc = "Explorer" },
+      { "<leader>fe", function() Snacks.explorer() end, desc = "Explorer" },
     },
     opts = {
+      notifier = { enabled = true },
+      explorer = { enabled = true },
       lazygit = { enabled = true },
       statuscolumn = { enabled = true },
       terminal = {
