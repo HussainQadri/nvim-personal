@@ -4,7 +4,9 @@ return {
     version = "*",
     cmd = { "ToggleTerm", "TermExec" },
     keys = {
-      { "<leader>ft", desc = "Toggle Toggleterm" },
+      { "<C-/>", "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal", mode = { "n", "t" } },
+      { "<C-_>", "<cmd>ToggleTerm<cr>", desc = "which_key_ignore", mode = { "n", "t" } },
+      { "<leader>ft", "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal" },
     },
     opts = {
       direction = "horizontal",

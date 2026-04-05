@@ -4,8 +4,6 @@ return {
     lazy = false,
     priority = 1000,
     keys = {
-      { "<c-/>", function() Snacks.terminal() end, desc = "Terminal", mode = { "n", "t" } },
-      { "<c-_>", function() Snacks.terminal() end, desc = "which_key_ignore", mode = { "n", "t" } },
       { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
       { "<leader>gG", function() Snacks.lazygit({ cwd = vim.fn.getcwd() }) end, desc = "Lazygit (cwd)" },
       { "<leader>e", function() Snacks.explorer() end, desc = "Explorer" },
@@ -29,15 +27,6 @@ return {
         },
       },
       statuscolumn = { enabled = true },
-      terminal = {
-        shell = "powershell",
-        win = {
-          keys = {
-            hide_slash = { "<C-/>", "hide", desc = "Hide Terminal", mode = "t" },
-            hide_underscore = { "<c-_>", "hide", desc = "which_key_ignore", mode = "t" },
-          },
-        },
-      },
       dashboard = {
         enabled = true,
         preset = {
