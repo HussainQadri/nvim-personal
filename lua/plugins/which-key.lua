@@ -4,6 +4,10 @@ return {
     event = "VeryLazy",
     opts = {
       preset = "helix",
+      disable = {
+        ft = {},
+        bt = { "terminal" },
+      },
       spec = {
         {
           mode = { "n", "x" },

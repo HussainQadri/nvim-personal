@@ -32,7 +32,7 @@ map("n", "<leader>rr", function()
   end, 30)
 end, { desc = "run python file (bottom terminal)" })
 
-map({ "n", "t" }, "<leader>ft", function()
+map("n", "<leader>ft", function()
   vim.cmd("ToggleTerm")
 end, { desc = "Toggle Toggleterm", silent = true })
 
