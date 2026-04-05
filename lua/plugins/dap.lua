@@ -3,6 +3,7 @@ return {
     "mfussenegger/nvim-dap",
     dependencies = {
       "jay-babu/mason-nvim-dap.nvim",
+      "rcarriga/nvim-dap-ui",
     },
     keys = {
       {
@@ -10,78 +11,72 @@ return {
         function()
           require("dap").continue()
         end,
-        desc = "debug: continue/start",
-      },
-      {
-        "<F7>",
-        function()
-          require("dap").step_over()
-        end,
-        desc = "debug: step over",
-      },
-      {
-        "<F6>",
-        function()
-          require("dap").step_into()
-        end,
-        desc = "debug: step into",
-      },
-      {
-        "<F12>",
-        function()
-          require("dap").step_out()
-        end,
-        desc = "debug: step out",
+        desc = "Continue",
       },
       {
         "<leader>db",
         function()
           require("dap").toggle_breakpoint()
         end,
-        desc = "debug: toggle breakpoint",
+        desc = "Breakpoint",
       },
       {
-        "<leader>da",
+        "<leader>dt",
         function()
-          require("dap").run({
-            type = "java",
-            request = "attach",
-            name = "Attach to Gradle JavaFX",
-            hostName = "127.0.0.1",
-            port = 5005,
-          })
+          require("dap").terminate()
         end,
-        desc = "debug: attach to gradle java",
+        desc = "Terminate",
       },
-      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
-      { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-      { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
-      { "<leader>dj", function() require("dap").down() end, desc = "Down" },
-      { "<leader>dk", function() require("dap").up() end, desc = "Up" },
-      { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
-      { "<leader>dP", function() require("dap").pause() end, desc = "Pause" },
-      { "<leader>dR", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-      { "<leader>ds", function() require("dap").session() end, desc = "Session" },
-      { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+      {
+        "<F6>",
+        function()
+          require("dap").step_into()
+        end,
+        desc = "Step Into",
+      },
+      {
+        "<F7>",
+        function()
+          require("dap").step_over()
+        end,
+        desc = "Step Over",
+      },
+      {
+        "<F12>",
+        function()
+          require("dap").step_out()
+        end,
+        desc = "Step Out",
+      },
     },
     config = function()
       local dap = require("dap")
-      local cmake = require("cmake-tools")
+
+      dap.adapters.cppdbg = {
+        id = "cppdbg",
+        type = "executable",
+        command = vim.fn.stdpath("data") .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7.exe",
+      }
 
       dap.configurations.cpp = {
         {
-          name = "CMake Debug",
-          type = "codelldb",
+          name = "Launch",
+          type = "cppdbg",
           request = "launch",
           program = function()
-            return cmake.get_launch_target_path()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
           end,
           cwd = "${workspaceFolder}",
-          stopOnEntry = false,
+          stopAtEntry = false,
+          setupCommands = {
+            {
+              text = "-enable-pretty-printing",
+              description = "Enable pretty printing",
+              ignoreFailures = false,
+            },
+          },
         },
       }
-
       dap.configurations.c = dap.configurations.cpp
     end,
   },
