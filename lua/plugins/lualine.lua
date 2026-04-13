@@ -46,7 +46,13 @@ return {
             end,
           },
         },
-        lualine_x = {},
+        lualine_x = {
+          {
+            function() return require("noice").api.status.mode.get() end,
+            cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+            color = function() return { fg = Snacks.util.color("Constant") } end,
+          },
+        },
         lualine_y = {
           {
             "location",

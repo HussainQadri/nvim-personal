@@ -18,7 +18,7 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
-  install = { colorscheme = { "zenbones", "habamax" } },
+  install = { colorscheme = { "rose-pine", "habamax" } },
   checker = {
     enabled = true,
     notify = false,

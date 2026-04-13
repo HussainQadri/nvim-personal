@@ -22,6 +22,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.mouse = "a"
 vim.opt.scrolloff = 8
+vim.opt.sidescrolloff = 8
 vim.opt.wrap = false
 vim.opt.fillchars = { eob = " " }
 vim.opt.laststatus = 3
