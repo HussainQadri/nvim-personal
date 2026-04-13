@@ -16,6 +16,9 @@ return {
       "MunifTanjim/nui.nvim",
     },
     opts = {
+      presets = {
+        command_palette = true,
+      },
       lsp = {
         signature = {
           auto_open = {

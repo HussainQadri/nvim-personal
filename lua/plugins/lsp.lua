@@ -37,7 +37,15 @@ return {
         capabilities = capabilities,
       })
 
-      vim.lsp.enable({ "clangd", "ty" })
+      vim.lsp.config("ruff", {
+        capabilities = capabilities,
+        on_attach = function(client)
+          -- let ty handle hover
+          client.server_capabilities.hoverProvider = false
+        end,
+      })
+
+      vim.lsp.enable({ "clangd", "ty", "ruff" })
 
       vim.diagnostic.config({
         underline = true,
@@ -70,16 +78,15 @@ return {
             vim.keymap.set(mode, lhs, rhs, { buffer = buf, desc = desc })
           end
 
-          m("n", "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, "Goto Definition")
-          m("n", "gr", "<cmd>Telescope lsp_references<cr>", "References")
-          m("n", "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, "Goto Implementation")
-          m("n", "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, "Goto Type Definition")
+          m("n", "gd", function() Snacks.picker.lsp_definitions() end, "Goto Definition")
+          m("n", "gr", function() Snacks.picker.lsp_references() end, "References")
+          m("n", "gI", function() Snacks.picker.lsp_implementations() end, "Goto Implementation")
+          m("n", "gy", function() Snacks.picker.lsp_type_definitions() end, "Goto Type Definition")
           m("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
           m("n", "K", vim.lsp.buf.hover, "Hover")
           m("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
           m("i", "<c-k>", vim.lsp.buf.signature_help, "Signature Help")
           m({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-          m("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
           m("n", "<leader>cm", "<cmd>Mason<cr>", "Mason")
         end,
       })

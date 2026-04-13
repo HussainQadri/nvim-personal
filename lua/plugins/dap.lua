@@ -2,7 +2,24 @@ return {
   {
     "mfussenegger/nvim-dap",
     dependencies = {
-      "jay-babu/mason-nvim-dap.nvim",
+      "mason-org/mason.nvim",
+      {
+        "jay-babu/mason-nvim-dap.nvim",
+        opts = {
+          ensure_installed = { "cpptools", "python" },
+          automatic_installation = true,
+          handlers = {
+            python = function() end,
+          },
+        },
+      },
+      {
+        "mfussenegger/nvim-dap-python",
+        ft = "python",
+        config = function()
+          require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
+        end,
+      },
       "rcarriga/nvim-dap-ui",
     },
     keys = {
@@ -51,11 +68,12 @@ return {
     },
     config = function()
       local dap = require("dap")
+      require("mason-nvim-dap").setup()
 
       dap.adapters.cppdbg = {
         id = "cppdbg",
         type = "executable",
-        command = vim.fn.stdpath("data") .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7.exe",
+        command = vim.fn.stdpath("data") .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
       }
 
       dap.configurations.cpp = {

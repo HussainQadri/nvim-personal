@@ -2,7 +2,7 @@ return {
   {
     "Civitasv/cmake-tools.nvim",
     ft = { "cmake", "cpp", "c" },
-    dependencies = { "akinsho/toggleterm.nvim" },
+    dependencies = { "akinsho/toggleterm.nvim", "nvim-lua/plenary.nvim" },
     opts = {
       cmake_dap_configuration = {
         name = "CMake Debug",

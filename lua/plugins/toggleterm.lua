@@ -14,7 +14,6 @@ return {
       start_in_insert = true,
       insert_mappings = true,
       terminal_mappings = true,
-      shell = "powershell",
       close_on_exit = false,
       open_mapping = nil,
     },
@@ -22,6 +21,7 @@ return {
       require("toggleterm").setup(opts)
 
       vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { silent = true })
+      vim.keymap.set("t", "<C-[>", [[<C-\><C-n>]], { silent = true })
     end,
   },
 }
