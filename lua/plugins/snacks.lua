@@ -51,7 +51,7 @@ return {
       { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Goto Symbol (Workspace)" },
     },
     opts = {
-      terminal = { win = { wo = { winbar = "" } } },
+      terminal = { win = { wo = { winbar = "", winhighlight = "Normal:Normal" }, keys = { term_normal = false } } },
       notifier = { enabled = true },
       input = { enabled = true },
       picker = { ui_select = true },
