@@ -51,7 +51,7 @@ map("n", "N", "'nN'[v:searchforward].'zzzv'", { expr = true, desc = "Prev Search
 map("x", "N", "'nN'[v:searchforward].'zz'", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
--- Add undo break-points
+-- Add undo break-points.
 map("i", ",", ",<c-g>u")
 map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
