@@ -28,6 +28,7 @@ vim.opt.fillchars = { eob = " " }
 vim.opt.laststatus = 3
 vim.opt.ruler = false
 vim.opt.showmode = false
+vim.opt.cmdheight = 0
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()

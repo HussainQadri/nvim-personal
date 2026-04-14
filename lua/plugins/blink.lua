@@ -40,6 +40,11 @@ return {
           ["<C-@>"] = { "show", "show_documentation", "hide_documentation" },
           ["<Nul>"] = { "show", "show_documentation", "hide_documentation" },
         },
+        cmdline = {
+          completion = {
+            menu = { auto_show = true },
+          },
+        },
       })
     end,
   },

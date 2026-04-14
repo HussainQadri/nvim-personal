@@ -6,21 +6,11 @@ return {
       {
         "jay-babu/mason-nvim-dap.nvim",
         opts = {
-          ensure_installed = { "cpptools", "python" },
+          ensure_installed = { "codelldb", "python" },
           automatic_installation = true,
-          handlers = {
-            python = function() end,
-          },
         },
       },
-      {
-        "mfussenegger/nvim-dap-python",
-        ft = "python",
-        config = function()
-          require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
-        end,
-      },
-      "rcarriga/nvim-dap-ui",
+      "igorlfs/nvim-dap-view",
     },
     keys = {
       {
@@ -68,34 +58,45 @@ return {
     },
     config = function()
       local dap = require("dap")
+      local mason = vim.fn.stdpath("data") .. "/mason/packages"
+
       require("mason-nvim-dap").setup()
 
-      dap.adapters.cppdbg = {
-        id = "cppdbg",
+      dap.adapters.codelldb = {
+        id = "codelldb",
         type = "executable",
-        command = vim.fn.stdpath("data") .. "/mason/packages/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
+        command = mason .. "/codelldb/codelldb",
+      }
+
+      dap.adapters.python = {
+        type = "executable",
+        command = mason .. "/debugpy/venv/bin/python",
+        args = { "-m", "debugpy.adapter" },
       }
 
       dap.configurations.cpp = {
         {
           name = "Launch",
-          type = "cppdbg",
+          type = "codelldb",
           request = "launch",
           program = function()
             return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
           end,
-          cwd = "${workspaceFolder}",
+          cwd = vim.fn.getcwd(),
           stopAtEntry = false,
-          setupCommands = {
-            {
-              text = "-enable-pretty-printing",
-              description = "Enable pretty printing",
-              ignoreFailures = false,
-            },
-          },
         },
       }
       dap.configurations.c = dap.configurations.cpp
+      dap.configurations.python = {
+        {
+          name = "Launch file",
+          type = "python",
+          request = "launch",
+          program = "${file}",
+          cwd = vim.fn.getcwd(),
+          console = "integratedTerminal",
+        },
+      }
     end,
   },
 }

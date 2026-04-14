@@ -24,7 +24,7 @@ return {
         lualine_b = {
           {
             "branch",
-            icon = "",
+            icon = "",
             separator = { left = "", right = "" },
             color = { gui = "" },
           },
@@ -48,8 +48,8 @@ return {
         },
         lualine_x = {
           {
-            function() return require("noice").api.status.mode.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+            function() return "recording @" .. vim.fn.reg_recording() end,
+            cond = function() return vim.fn.reg_recording() ~= "" end,
             color = function() return { fg = Snacks.util.color("Constant") } end,
           },
         },

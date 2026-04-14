@@ -18,6 +18,7 @@ return {
       { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Files (git)" },
       { "<leader>fh", function() Snacks.picker.help() end, desc = "Help" },
+      { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
       { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
       -- git
       { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Commits" },
@@ -41,10 +42,16 @@ return {
       { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
       { "<leader>sw", function() Snacks.picker.grep_word() end, desc = "Word under Cursor", mode = { "n", "x" } },
       { "<leader>uC", function() Snacks.picker.colorschemes() end, desc = "Colorscheme with Preview" },
+      -- terminal
+      { "<C-/>", function() Snacks.terminal() end, desc = "Terminal", mode = { "n", "t" } },
+      { "<C-_>", function() Snacks.terminal() end, desc = "which_key_ignore", mode = { "n", "t" } },
+      { "<leader>ft", function() Snacks.terminal() end, desc = "Terminal" },
+      { "<leader>sn", function() Snacks.notifier.show_history() end, desc = "Notification History" },
       { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "Goto Symbol" },
       { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Goto Symbol (Workspace)" },
     },
     opts = {
+      terminal = { win = { wo = { winbar = "" } } },
       notifier = { enabled = true },
       input = { enabled = true },
       picker = { ui_select = true },

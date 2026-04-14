@@ -1,44 +1,8 @@
 local map = vim.keymap.set
 
-local runner_inst = nil
-local function get_runner()
-  if not runner_inst then
-    local Terminal = require("toggleterm.terminal").Terminal
-    runner_inst = Terminal:new({
-      count = 1,
-      direction = "horizontal",
-      hidden = true,
-      close_on_exit = false,
-    })
-  end
-  return runner_inst
-end
-
-map("n", "<leader>cc", function()
-  pcall(vim.cmd, "CMakeCloseExecutor")
-  pcall(vim.cmd, "CMakeCloseRunner")
-end, { desc = "cmake close terminals" })
-
-map("n", "<leader>rr", function()
-  vim.cmd("w")
-  local file = vim.fn.expand("%:p")
-  if file == "" then
-    return
-  end
-  local r = get_runner()
-  r:toggle()
-  vim.defer_fn(function()
-    r:send("python -u " .. vim.fn.shellescape(file) .. "\n")
-  end, 30)
-end, { desc = "run python file (bottom terminal)" })
-
-map("n", "<leader>ft", function()
-  vim.cmd("ToggleTerm")
-end, { desc = "Toggle Toggleterm", silent = true })
-
-map("n", "<leader>rt", function()
-  get_runner():toggle()
-end, { desc = "toggle runner terminal" })
+-- Terminal escape
+map("t", "<Esc>", [[<C-\><C-n>]], { silent = true })
+map("t", "<C-[>", [[<C-\><C-n>]], { silent = true })
 
 
 -- better up/down (wrapping-aware)
