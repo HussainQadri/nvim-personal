@@ -7,6 +7,7 @@ return {
     opts = {
       styles = {
         italic = false,
+        transparency = true, 
       },
     },
     config = function(_, opts)

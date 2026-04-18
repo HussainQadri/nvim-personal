@@ -1,9 +1,13 @@
 return {
-  {
-    "nvim-mini/mini.pairs",
-    event = "VeryLazy",
-    opts = {
-      modes = { insert = true, command = true, terminal = false },
-    },
-  },
+  "nvim-mini/mini.pairs",
+  version = "*",
+  config = function()
+    require("mini.pairs").setup({
+      mappings = {
+        ['"'] = false,
+        ["'"] = false,
+        ["`"] = false,
+      },
+    })
+  end,
 }

@@ -12,7 +12,7 @@ return {
       "neovim/nvim-lspconfig",
     },
     opts = {
-      ensure_installed = { "clangd" },
+      ensure_installed = { "clangd", "pyrefly" },
     },
   },
   {
@@ -30,22 +30,21 @@ return {
         capabilities = capabilities,
       })
 
-      vim.lsp.config("ty", {
-        cmd = { "ty", "server" },
+      vim.lsp.config("pyrefly", {
+        cmd = { "pyrefly", "lsp" },
         filetypes = { "python" },
-        root_markers = { "pyproject.toml", "setup.py", ".git" },
+        root_markers = { "pyrefly.toml", "pyproject.toml", "setup.py", ".git" },
         capabilities = capabilities,
       })
 
       vim.lsp.config("ruff", {
         capabilities = capabilities,
         on_attach = function(client)
-          -- let ty handle hover
           client.server_capabilities.hoverProvider = false
         end,
       })
 
-      vim.lsp.enable({ "clangd", "ty", "ruff" })
+      vim.lsp.enable({ "clangd", "pyrefly", "ruff" })
 
       vim.diagnostic.config({
         underline = true,

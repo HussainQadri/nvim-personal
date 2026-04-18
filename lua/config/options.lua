@@ -30,6 +30,23 @@ vim.opt.ruler = false
 vim.opt.showmode = false
 vim.opt.cmdheight = 0
 
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+  callback = function()
+    if vim.fn.getcmdwintype() == "" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+  end,
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.hl.on_yank()
