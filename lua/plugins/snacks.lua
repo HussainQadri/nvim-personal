@@ -49,6 +49,8 @@ return {
       { "<leader>sn", function() Snacks.notifier.show_history() end, desc = "Notification History" },
       { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "Goto Symbol" },
       { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "Goto Symbol (Workspace)" },
+      -- zoom
+      { "<leader>wz", function() Snacks.zen.zoom() end, desc = "Zoom" },
     },
     opts = {
       terminal = { win = { wo = { winbar = "", winhighlight = "Normal:Normal" }, keys = { term_normal = false } } },
@@ -71,6 +73,7 @@ return {
         },
       },
       statuscolumn = { enabled = true },
+      zen = { enabled = true },
       dashboard = {
         enabled = true,
         preset = {
