@@ -53,7 +53,7 @@ return {
       { "<leader>wz", function() Snacks.zen.zoom() end, desc = "Zoom" },
     },
     opts = {
-      terminal = { win = { wo = { winbar = "", winhighlight = "Normal:Normal" }, keys = { term_normal = false } } },
+      terminal = { win = { wo = { winbar = "", winhighlight = "Normal:Normal" } } },
       notifier = { enabled = true },
       input = { enabled = true },
       picker = { ui_select = true },
