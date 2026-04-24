@@ -29,6 +29,7 @@ vim.opt.laststatus = 3
 vim.opt.ruler = false
 vim.opt.showmode = false
 vim.opt.cmdheight = 0
+vim.opt.winborder = "rounded"
 
 vim.opt.autoread = true
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {

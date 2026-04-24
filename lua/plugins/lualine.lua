@@ -40,17 +40,27 @@ return {
             },
           },
           {
-            function()
-              local path = vim.fn.expand("%:p")
-              return path ~= "" and vim.fn.fnamemodify(path, ":~") or ""
-            end,
+            "filename",
+            path = 1,
+            symbols = {
+              modified = "[+]",
+              readonly = "[-]",
+              unnamed = "[No Name]",
+              newfile = "[New]",
+            },
           },
         },
         lualine_x = {
           {
-            function() return "recording @" .. vim.fn.reg_recording() end,
-            cond = function() return vim.fn.reg_recording() ~= "" end,
-            color = function() return { fg = Snacks.util.color("Constant") } end,
+            function()
+              return "recording @" .. vim.fn.reg_recording()
+            end,
+            cond = function()
+              return vim.fn.reg_recording() ~= ""
+            end,
+            color = function()
+              return { fg = Snacks.util.color("Constant") }
+            end,
           },
         },
         lualine_y = {
