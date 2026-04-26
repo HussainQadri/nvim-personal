@@ -1,3 +1,71 @@
+local function human_size(bytes)
+    local units = { "B", "K", "M", "G", "T" }
+    local i = 1
+    local n = bytes
+    while n >= 1024 and i < #units do
+        n = n / 1024
+        i = i + 1
+    end
+    if i == 1 then
+        return string.format("%5d%s", n, units[i])
+    end
+    return string.format("%5.1f%s", n, units[i])
+end
+
+local PERM = { "---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx" }
+local function perms_str(mode, ftype)
+    local t = ftype == "directory" and "d" or ftype == "link" and "l" or "-"
+    local u = PERM[bit.band(bit.rshift(mode, 6), 7) + 1]
+    local g = PERM[bit.band(bit.rshift(mode, 3), 7) + 1]
+    local o = PERM[bit.band(mode, 7) + 1]
+    return t .. u .. g .. o
+end
+
+local uv = vim.uv or vim.loop
+
+local function stat_transform(item)
+    if not item.file then return end
+    local s = uv.fs_stat(item.file)
+    if not s then return end
+    item.perms = perms_str(s.mode, s.type)
+    item.size = human_size(s.size)
+end
+
+vim.api.nvim_set_hl(0, "SnacksPickerPermsType", { default = true, link = "Directory" })
+vim.api.nvim_set_hl(0, "SnacksPickerPermsRead", { default = true, link = "DiagnosticOk" })
+vim.api.nvim_set_hl(0, "SnacksPickerPermsWrite", { default = true, link = "DiagnosticWarn" })
+vim.api.nvim_set_hl(0, "SnacksPickerPermsExec", { default = true, link = "DiagnosticError" })
+vim.api.nvim_set_hl(0, "SnacksPickerPermsNone", { default = true, link = "Comment" })
+vim.api.nvim_set_hl(0, "SnacksPickerSize", { default = true, link = "Number" })
+
+local PERM_HL = {
+    ["-"] = "SnacksPickerPermsNone",
+    ["r"] = "SnacksPickerPermsRead",
+    ["w"] = "SnacksPickerPermsWrite",
+    ["x"] = "SnacksPickerPermsExec",
+    ["d"] = "SnacksPickerPermsType",
+    ["l"] = "SnacksPickerPermsType",
+}
+
+local BLANK = string.rep(" ", #"-rw-r--r--" + 1 + 6 + 2)
+
+local function format_file_stat(item, picker)
+    local ret = {}
+    if item.perms then
+        for i = 1, #item.perms do
+            local c = item.perms:sub(i, i)
+            ret[#ret + 1] = { c, PERM_HL[c] }
+        end
+        ret[#ret + 1] = { " " }
+        ret[#ret + 1] = { item.size, "SnacksPickerSize" }
+        ret[#ret + 1] = { "  " }
+    else
+        ret[#ret + 1] = { BLANK }
+    end
+    vim.list_extend(ret, Snacks.picker.format.file(item, picker))
+    return ret
+end
+
 return {
     {
         "folke/snacks.nvim",
@@ -60,6 +128,13 @@ return {
                 ui_select = true,
                 layout = {
                     preset = "ivy",
+                },
+                sources = {
+                    files = { format = format_file_stat, transform = stat_transform, layout = { preset = "ivy", hidden = { "preview" } } },
+                    recent = { format = format_file_stat, transform = stat_transform, layout = { preset = "ivy", hidden = { "preview" } } },
+                    git_files = { format = format_file_stat, transform = stat_transform, layout = { preset = "ivy", hidden = { "preview" } } },
+                    smart = { format = format_file_stat, transform = stat_transform, layout = { preset = "ivy", hidden = { "preview" } } },
+                    buffers = { layout = { preset = "ivy", hidden = { "preview" } } },
                 },
             },
             explorer = { enabled = true },
