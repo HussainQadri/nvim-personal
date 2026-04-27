@@ -107,11 +107,3 @@ map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hi
 -- Inspect
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
--- Tabs
-map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
-map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
