@@ -70,6 +70,10 @@ map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Commen
 -- Lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
+-- Git
+map("n", "<leader>gb", function() require("gitsigns").blame_line({ full = true }) end, { desc = "Git Blame Line" })
+map("n", "<leader>gB", "<cmd>Gitsigns blame<cr>", { desc = "Git Blame (buffer)" })
+
 -- New file
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
