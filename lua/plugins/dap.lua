@@ -62,6 +62,29 @@ return {
 
       require("mason-nvim-dap").setup()
 
+      dap.defaults.fallback.switchbuf = function(bufnr, line, column)
+        local api = vim.api
+        local function jump(win)
+          api.nvim_win_set_buf(win, bufnr)
+          pcall(api.nvim_win_set_cursor, win, { line, math.max(0, column - 1) })
+          api.nvim_set_current_win(win)
+        end
+        for _, w in ipairs(api.nvim_tabpage_list_wins(0)) do
+          if api.nvim_win_get_buf(w) == bufnr then
+            return jump(w)
+          end
+        end
+        for _, w in ipairs(api.nvim_tabpage_list_wins(0)) do
+          local cfg = api.nvim_win_get_config(w)
+          local b = api.nvim_win_get_buf(w)
+          if cfg.relative == "" and not vim.wo[w].winfixbuf and vim.bo[b].buftype == "" then
+            return jump(w)
+          end
+        end
+        vim.cmd("split " .. api.nvim_buf_get_name(bufnr))
+        pcall(api.nvim_win_set_cursor, 0, { line, math.max(0, column - 1) })
+      end
+
       dap.adapters.codelldb = {
         id = "codelldb",
         type = "executable",
