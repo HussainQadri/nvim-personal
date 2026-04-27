@@ -22,7 +22,6 @@ return {
             { "<leader>gs",       function() Snacks.picker.git_status() end,                              desc = "Status" },
             -- search
             { '<leader>s"',       function() Snacks.picker.registers() end,                               desc = "Registers" },
-            { "<leader>sa",       function() Snacks.picker.autocmds() end,                                desc = "Auto Commands" },
             { "<leader>sb",       function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
             { "<leader>sC",       function() Snacks.picker.commands() end,                                desc = "Commands" },
             { "<leader>sd",       function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
@@ -32,7 +31,6 @@ return {
             { "<leader>sj",       function() Snacks.picker.jumps() end,                                   desc = "Jumplist" },
             { "<leader>sk",       function() Snacks.picker.keymaps() end,                                 desc = "Key Maps" },
             { "<leader>sl",       function() Snacks.picker.loclist() end,                                 desc = "Location List" },
-            { "<leader>sm",       function() Snacks.picker.marks() end,                                   desc = "Jump to Mark" },
             { "<leader>sR",       function() Snacks.picker.resume() end,                                  desc = "Resume" },
             { "<leader>sq",       function() Snacks.picker.qflist() end,                                  desc = "Quickfix List" },
             { "<leader>sw",       function() Snacks.picker.grep_word() end,                               desc = "Word under Cursor",       mode = { "n", "x" } },
