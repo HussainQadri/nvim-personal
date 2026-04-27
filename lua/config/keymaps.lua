@@ -107,14 +107,6 @@ map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hi
 -- Inspect
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
--- Quit all
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
-
--- Windows
-map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
-
 -- Tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
 map("n", "<leader><tab>o", "<cmd>tabonly<cr>", { desc = "Close Other Tabs" })
