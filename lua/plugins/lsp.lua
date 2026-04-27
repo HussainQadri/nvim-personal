@@ -113,9 +113,9 @@ return {
                     end
 
                     m("n", "gd", function() Snacks.picker.lsp_definitions() end, "Goto Definition")
-                    m("n", "gr", function() Snacks.picker.lsp_references() end, "References")
-                    m("n", "gI", function() Snacks.picker.lsp_implementations() end, "Goto Implementation")
-                    m("n", "gy", function() Snacks.picker.lsp_type_definitions() end, "Goto Type Definition")
+                    m("n", "grr", function() Snacks.picker.lsp_references() end, "References")
+                    m("n", "gri", function() Snacks.picker.lsp_implementations() end, "Goto Implementation")
+                    m("n", "grt", function() Snacks.picker.lsp_type_definitions() end, "Goto Type Definition")
                     m("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
                     m("n", "K", vim.lsp.buf.hover, "Hover")
                     m("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
