@@ -63,10 +63,6 @@ map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 map("x", "<", "<gv")
 map("x", ">", ">gv")
 
--- Commenting
-map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
-map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
-
 -- Lazy
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 

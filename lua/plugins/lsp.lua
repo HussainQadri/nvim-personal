@@ -120,7 +120,6 @@ return {
                     m("n", "K", vim.lsp.buf.hover, "Hover")
                     m("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
                     m("i", "<c-k>", vim.lsp.buf.signature_help, "Signature Help")
-                    m({ "n", "x" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
                     m("n", "<leader>cm", "<cmd>Mason<cr>", "Mason")
                 end,
             })
