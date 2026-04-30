@@ -12,7 +12,7 @@ return {
             "neovim/nvim-lspconfig",
         },
         opts = {
-            ensure_installed = { "clangd", "pyrefly", "vtsls" },
+            ensure_installed = { "clangd", "lua_ls", "pyrefly", "ruff", "vtsls" },
         },
     },
     {
@@ -79,7 +79,7 @@ return {
                 end,
             })
 
-            vim.lsp.enable({ "clangd", "pyrefly", "ruff" })
+            vim.lsp.enable({ "clangd", "lua_ls", "pyrefly", "ruff", "vtsls" })
 
             vim.diagnostic.config({
                 underline = true,
