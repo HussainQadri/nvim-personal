@@ -8,6 +8,9 @@ return {
                 globalstatus = true,
                 component_separators = "",
                 section_separators = "",
+                disabled_filetypes = {
+                    statusline = { "snacks_dashboard" },
+                },
             },
             sections = {
                 lualine_b = {
