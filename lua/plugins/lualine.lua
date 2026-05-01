@@ -1,27 +1,27 @@
 return {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-        require("lualine").setup({
-            options = {
-                theme = "auto",
-                globalstatus = true,
-                component_separators = "",
-                section_separators = "",
-                disabled_filetypes = {
-                    statusline = { "snacks_dashboard" },
-                },
-            },
-            sections = {
-                lualine_b = {
-                    { "branch", icon = "" },
-                    "diff",
-                    "diagnostics",
-                },
-                lualine_c = { "filename", "filetype" },
-                lualine_x = { "fileformat" },
-                lualine_z = {},
-            },
-        })
-    end,
+	"nvim-lualine/lualine.nvim",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	config = function()
+		local lualine = require("lualine")
+		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+		lualine.setup({
+			options = {
+				theme = "auto",
+			},
+			sections = {
+				lualine_c = {
+					{ "filename" },
+					{ "filetype" },
+				},
+				lualine_x = {
+					{
+						lazy_status.updates,
+						cond = lazy_status.has_updates,
+					},
+					{ "encoding" },
+					{ "fileformat" },
+				},
+			},
+		})
+	end,
 }

@@ -4,8 +4,6 @@ return {
         lazy = false,
         priority = 1000,
         keys = {
-            -- explorer
-            { "<leader>e",        function() Snacks.explorer() end,                                       desc = "Explorer" },
             -- lazygit
             { "<leader>gg",       function() Snacks.lazygit() end,                                        desc = "Lazygit" },
             { "<leader>gG",       function() Snacks.lazygit({ cwd = vim.fn.getcwd() }) end,               desc = "Lazygit (cwd)" },
@@ -67,7 +65,7 @@ return {
                     jumps            = { layout = { preset = "ivy", hidden = { "preview" } } },
                 },
             },
-            explorer = { enabled = true },
+            explorer = { enabled = false },
             lazygit = {
                 enabled = true,
                 theme = {
