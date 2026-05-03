@@ -110,6 +110,21 @@ return {
         },
       }
       dap.configurations.c = dap.configurations.cpp
+      dap.configurations.rust = {
+        {
+          name = "Launch",
+          type = "codelldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
+          end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+          breakpointMode = "file",
+          initCommands = { "settings set target.inline-breakpoint-strategy always" },
+          sourceLanguages = { "rust" },
+        },
+      }
       dap.configurations.python = {
         {
           name = "Launch file",
