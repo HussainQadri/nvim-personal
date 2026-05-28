@@ -9,6 +9,9 @@ return {
 				theme = "auto",
 			},
 			sections = {
+				lualine_b = {
+					{ "branch", icon = "" },
+				},
 				lualine_c = {
 					{ "filename" },
 					{ "filetype" },
@@ -18,8 +21,6 @@ return {
 						lazy_status.updates,
 						cond = lazy_status.has_updates,
 					},
-					{ "encoding" },
-					{ "fileformat" },
 				},
 			},
 		})
