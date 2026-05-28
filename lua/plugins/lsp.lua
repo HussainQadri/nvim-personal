@@ -12,7 +12,7 @@ return {
             "neovim/nvim-lspconfig",
         },
         opts = {
-            ensure_installed = { "clangd", "lua_ls", "pyrefly", "ruff", "vtsls" },
+            ensure_installed = { "clangd", "lua_ls", "pyrefly", "ruff", "rust_analyzer", "vtsls" },
         },
     },
     {
@@ -78,8 +78,11 @@ return {
                     client.server_capabilities.hoverProvider = false
                 end,
             })
+            vim.lsp.config("rust_analyzer", {
+                capabilities = capabilities,
+            })
 
-            vim.lsp.enable({ "clangd", "lua_ls", "pyrefly", "ruff", "vtsls" })
+            vim.lsp.enable({ "clangd", "lua_ls", "pyrefly", "ruff", "rust_analyzer", "vtsls" })
 
             vim.diagnostic.config({
                 underline = true,

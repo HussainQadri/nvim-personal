@@ -118,6 +118,9 @@ return {
           program = function()
             return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/target/debug/", "file")
           end,
+          args = function()
+            return require("dap.utils").splitstr(vim.fn.input("Program args: "))
+          end,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
           breakpointMode = "file",
