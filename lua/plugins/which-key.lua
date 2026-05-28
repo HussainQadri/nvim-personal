@@ -1,11 +1,12 @@
 return {
   {
     "folke/which-key.nvim",
+    enabled = false,
     event = "VeryLazy",
     opts = {
       preset = "helix",
       disable = {
-        ft = {},
+        ft = { "snacks_terminal" },
         bt = { "terminal" },
       },
       icons = {

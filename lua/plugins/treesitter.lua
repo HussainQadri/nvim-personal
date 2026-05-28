@@ -19,7 +19,8 @@ return {
                 "markdown_inline",
                 "javascript",
                 "typescript",
-                "tsx"
+                "tsx",
+                "rust",
             }
 
             TS.setup({
