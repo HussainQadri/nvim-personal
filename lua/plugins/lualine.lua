@@ -26,11 +26,21 @@ return {
 
         lualine.setup({
             options = {
-                theme = "auto",
+                theme = "no-clown-fiesta",
             },
             sections = {
                 lualine_b = {
                     { "branch", icon = "" },
+                    {
+                        "diagnostics",
+                        sources = { "nvim_diagnostic" },
+                        symbols = {
+                            error = " ",
+                            warn = " ",
+                            info = " ",
+                            hint = " ",
+                        },
+                    },
                 },
                 lualine_c = {
                     { "filename" },

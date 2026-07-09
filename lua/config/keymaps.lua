@@ -14,6 +14,10 @@ map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+map("n", "<leader>wh", "<C-w>h", { desc = "Go to Left Window", remap = true })
+map("n", "<leader>wj", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+map("n", "<leader>wk", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+map("n", "<leader>wl", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
@@ -86,11 +90,12 @@ map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- Diagnostics
-map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Prev Diagnostic" })
-map("n", "]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true }) end, { desc = "Next Error" })
-map("n", "[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = true }) end, { desc = "Prev Error" })
-map("n", "]w", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN, float = true }) end, { desc = "Next Warning" })
-map("n", "[w", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN, float = true }) end, { desc = "Prev Warning" })
+map("n", "]d", function() vim.diagnostic.jump({ count = 1, float = false }) end, { desc = "Next Diagnostic" })
+map("n", "[d", function() vim.diagnostic.jump({ count = -1, float = false }) end, { desc = "Prev Diagnostic" })
+map("n", "]e", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = false }) end, { desc = "Next Error" })
+map("n", "[e", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = false }) end, { desc = "Prev Error" })
+map("n", "]w", function() vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.WARN, float = false }) end, { desc = "Next Warning" })
+map("n", "[w", function() vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.WARN, float = false }) end, { desc = "Prev Warning" })
 
 -- Toggle options
 map("n", "<leader>us", function() vim.o.spell = not vim.o.spell; vim.notify("Spell: " .. tostring(vim.o.spell)) end, { desc = "Toggle Spelling" })
@@ -102,4 +107,3 @@ map("n", "<leader>uh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hi
 
 -- Inspect
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-

@@ -26,6 +26,7 @@ return {
           { "<leader>r", group = "run" },
           { "<leader>s", group = "search" },
           { "<leader>u", group = "ui" },
+          { "<leader>w", group = "windows" },
           { "<leader>x", group = "diagnostics/quickfix" },
           { "[", group = "prev" },
           { "]", group = "next" },
