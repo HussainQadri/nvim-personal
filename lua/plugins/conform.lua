@@ -24,9 +24,20 @@ return {
             },
             formatters = {
                 ["clang-format"] = {
-                    prepend_args = {
-                        "--style={BasedOnStyle: LLVM, IndentWidth: 4, AccessModifierOffset: -4, AllowShortFunctionsOnASingleLine: None, PointerAlignment: Left, ReferenceAlignment: Left}",
-                    },
+                    prepend_args = function(_, ctx)
+                        local config = vim.fs.find({ ".clang-format", "_clang-format" }, {
+                            upward = true,
+                            path = ctx.dirname,
+                        })[1]
+
+                        if config then
+                            return {}
+                        end
+
+                        return {
+                            "--style={BasedOnStyle: LLVM, IndentWidth: 4, AccessModifierOffset: -4, AllowShortFunctionsOnASingleLine: None, PointerAlignment: Left, ReferenceAlignment: Left}",
+                        }
+                    end,
                 },
             },
         },
