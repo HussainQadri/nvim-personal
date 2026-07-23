@@ -26,7 +26,7 @@ return {
 
         lualine.setup({
             options = {
-                theme = "no-clown-fiesta",
+                theme = "auto",
             },
             sections = {
                 lualine_b = {

@@ -1,13 +1,13 @@
 return {
     {
-        "aktersnurra/no-clown-fiesta.nvim",
+        "oskarnurm/koda.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            require("no-clown-fiesta").load({
-                theme = "dark",
+            require("koda").setup({
                 transparent = true,
             })
+            vim.cmd.colorscheme("koda-dark")
         end,
     },
 }
