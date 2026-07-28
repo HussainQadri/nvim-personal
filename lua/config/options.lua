@@ -53,6 +53,33 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "css",
+        "html",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "typescript",
+        "typescriptreact",
+    },
+    callback = function(args)
+        local editorconfig = vim.b[args.buf].editorconfig or {}
+
+        if editorconfig.indent_style == nil then
+            vim.bo[args.buf].expandtab = true
+        end
+        if editorconfig.indent_size == nil and editorconfig.indent_style ~= "tab" then
+            vim.bo[args.buf].shiftwidth = 2
+            vim.bo[args.buf].softtabstop = 2
+        end
+        if editorconfig.tab_width == nil and editorconfig.indent_size == nil then
+            vim.bo[args.buf].tabstop = 2
+        end
+    end,
+})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
         vim.hl.on_yank()

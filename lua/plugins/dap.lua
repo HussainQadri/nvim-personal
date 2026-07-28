@@ -62,6 +62,31 @@ return {
 
       require("mason-nvim-dap").setup()
 
+      local function current_cwd()
+        return vim.fn.getcwd()
+      end
+
+      local function python_path()
+        local has_venv_selector, venv_selector = pcall(require, "venv-selector")
+        if has_venv_selector then
+          local selected_python = venv_selector.python()
+          if selected_python and vim.fn.executable(selected_python) == 1 then
+            return selected_python
+          end
+        end
+
+        local active_venv = vim.env.VIRTUAL_ENV or vim.env.CONDA_PREFIX
+        if active_venv then
+          local active_python = active_venv .. "/bin/python"
+          if vim.fn.executable(active_python) == 1 then
+            return active_python
+          end
+        end
+
+        local python = vim.fn.exepath("python3")
+        return python ~= "" and python or "python3"
+      end
+
       dap.defaults.fallback.switchbuf = function(bufnr, line, column)
         local api = vim.api
         local function jump(win)
@@ -81,8 +106,8 @@ return {
             return jump(w)
           end
         end
-        vim.cmd("split " .. api.nvim_buf_get_name(bufnr))
-        pcall(api.nvim_win_set_cursor, 0, { line, math.max(0, column - 1) })
+        vim.cmd("split")
+        jump(api.nvim_get_current_win())
       end
 
       dap.adapters.codelldb = {
@@ -105,8 +130,8 @@ return {
           program = function()
             return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
           end,
-          cwd = vim.fn.getcwd(),
-          stopAtEntry = false,
+          cwd = current_cwd,
+          stopOnEntry = false,
         },
       }
       dap.configurations.c = dap.configurations.cpp
@@ -134,7 +159,8 @@ return {
           type = "python",
           request = "launch",
           program = "${file}",
-          cwd = vim.fn.getcwd(),
+          cwd = current_cwd,
+          pythonPath = python_path,
           console = "integratedTerminal",
         },
       }
