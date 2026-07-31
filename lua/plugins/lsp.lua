@@ -39,12 +39,19 @@ return {
             vim.lsp.config("vtsls", {
                 capabilities = capabilities,
                 settings = {
+                    ["js/ts"] = {
+                        implicitProjectConfig = {
+                            checkJs = true,
+                            strict = false,
+                        },
+                    },
                     typescript = {
                         format = {
                             indentSize = 2,
                             tabSize = 2,
                             convertTabsToSpaces = true,
-                            semicolons = "remove",
+                            semicolons = "insert",
+                            insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
                         },
                     },
                     javascript = {
@@ -52,7 +59,8 @@ return {
                             indentSize = 2,
                             tabSize = 2,
                             convertTabsToSpaces = true,
-                            semicolons = "remove",
+                            semicolons = "insert",
+                            insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = false,
                         },
                     },
                 },
