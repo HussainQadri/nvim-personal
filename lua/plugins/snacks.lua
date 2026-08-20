@@ -15,6 +15,7 @@ return {
             { "<leader>fg",       function() Snacks.picker.git_files() end,                               desc = "Find Files (git)" },
             { "<leader>fc",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
             { "<leader>fr",       function() Snacks.picker.recent() end,                                  desc = "Recent" },
+            { "<leader>e",        function() Snacks.explorer() end,                                       desc = "File Explorer" },
             -- git
             { "<leader>gc",       function() Snacks.picker.git_log() end,                                 desc = "Commits" },
             { "<leader>gs",       function() Snacks.picker.git_status() end,                              desc = "Status" },
@@ -43,6 +44,7 @@ return {
             { "<leader>wz",       function() Snacks.zen.zoom() end,                                       desc = "Zoom" },
         },
         opts = {
+            bigfile = { enabled = true },
             terminal = { win = { wo = { winbar = "", winhighlight = "Normal:Normal" } } },
             notifier = { enabled = true },
             input = { enabled = true },
@@ -65,7 +67,10 @@ return {
                     jumps            = { layout = { preset = "ivy", hidden = { "preview" } } },
                 },
             },
-            explorer = { enabled = false },
+            explorer = {
+                enabled = true,
+                replace_netrw = false,
+            },
             lazygit = {
                 enabled = true,
                 theme = {

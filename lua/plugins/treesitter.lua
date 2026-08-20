@@ -10,6 +10,7 @@ return {
             local ensure = {
                 "c",
                 "cpp",
+                "html",
                 "java",
                 "python",
                 "lua",

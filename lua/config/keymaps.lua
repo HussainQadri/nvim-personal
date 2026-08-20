@@ -9,11 +9,7 @@ map("t", "<C-[>", [[<C-\><C-n>]], { silent = true })
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
 
--- Move to window using <ctrl> hjkl
-map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+-- Window navigation fallback; Ctrl-h/j/k/l is provided by smart-splits.nvim.
 map("n", "<leader>wh", "<C-w>h", { desc = "Go to Left Window", remap = true })
 map("n", "<leader>wj", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 map("n", "<leader>wk", "<C-w>k", { desc = "Go to Upper Window", remap = true })
