@@ -1,13 +1,20 @@
 return {
     {
-        "oskarnurm/koda.nvim",
+        "webhooked/kanso.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            require("koda").setup({
-                transparent = true,
+            require("kanso").setup({
+                transparent = false,
+                dimInactive = false,
+                terminalColors = true,
+                minimal = true,
+                background = {
+                    dark = "zen",
+                    light = "pearl",
+                },
             })
-            vim.cmd.colorscheme("koda-dark")
+            vim.cmd.colorscheme("kanso-zen")
         end,
     },
 }
