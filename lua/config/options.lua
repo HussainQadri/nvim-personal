@@ -24,7 +24,16 @@ vim.opt.mouse = "a"
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.wrap = false
-vim.opt.fillchars = { eob = " " }
+vim.opt.fillchars = {
+    eob = " ",
+    horiz = "─",
+    horizdown = "┬",
+    horizup = "┴",
+    vert = "│",
+    vertleft = "┤",
+    vertright = "├",
+    verthoriz = "┼",
+}
 vim.opt.laststatus = 3
 vim.opt.ruler = false
 vim.opt.showmode = false
