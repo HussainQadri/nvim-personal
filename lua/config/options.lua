@@ -39,20 +39,11 @@ vim.opt.ruler = false
 vim.opt.showmode = false
 vim.opt.cmdheight = 0
 vim.opt.winborder = "rounded"
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 
 vim.opt.autoread = true
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
-    callback = function()
-        if vim.fn.getcmdwintype() == "" then
-            vim.cmd("checktime")
-        end
-    end,
-})
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",

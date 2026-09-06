@@ -20,7 +20,7 @@ require("lazy").setup({
     },
     install = { colorscheme = { "kanso-zen", "habamax" } },
     checker = {
-        enabled = true,
+        enabled = false,
         notify = false,
     },
     performance = {
