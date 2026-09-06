@@ -6,13 +6,14 @@ return {
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        event = { "BufReadPre", "BufNewFile" },
+        cmd = { "LspInstall", "LspUninstall" },
         dependencies = {
             "mason-org/mason.nvim",
             "neovim/nvim-lspconfig",
         },
         opts = {
-            ensure_installed = { "clangd", "lua_ls", "pyrefly", "ruff", "rust_analyzer", "vtsls" },
+            -- Install servers explicitly with :Mason or :LspInstall.
+            ensure_installed = {},
         },
     },
     {
@@ -24,6 +25,18 @@ return {
         },
         config = function()
             local capabilities = require("blink.cmp").get_lsp_capabilities()
+            local python_root_markers = {
+                "pyproject.toml",
+                "ruff.toml",
+                ".ruff.toml",
+                "pyrefly.toml",
+                "setup.py",
+                "setup.cfg",
+                "requirements.txt",
+                "Pipfile",
+                "manage.py",
+                ".git",
+            }
 
             vim.lsp.config("clangd", {
                 cmd = { "clangd", "--fallback-style=GNU" },
@@ -33,8 +46,16 @@ return {
             vim.lsp.config("pyrefly", {
                 cmd = { "pyrefly", "lsp" },
                 filetypes = { "python" },
-                root_markers = { "pyrefly.toml", "pyproject.toml", "setup.py", ".git" },
+                root_markers = python_root_markers,
+                workspace_required = true,
                 capabilities = capabilities,
+                on_exit = function(code)
+                    if code ~= 0 then
+                        vim.schedule(function()
+                            vim.notify("Pyrefly exited with code: " .. code, vim.log.levels.ERROR)
+                        end)
+                    end
+                end,
             })
             vim.lsp.config("vtsls", {
                 capabilities = capabilities,
@@ -81,6 +102,8 @@ return {
                 },
             })
             vim.lsp.config("ruff", {
+                root_markers = python_root_markers,
+                workspace_required = true,
                 capabilities = capabilities,
                 on_attach = function(client)
                     client.server_capabilities.hoverProvider = false
