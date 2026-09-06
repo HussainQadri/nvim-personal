@@ -15,6 +15,12 @@ map("n", "<leader>wj", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 map("n", "<leader>wk", "<C-w>k", { desc = "Go to Upper Window", remap = true })
 map("n", "<leader>wl", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
+-- Multicursor
+map("n", "<leader>mc", function()
+  local namespace = vim.api.nvim_create_namespace("nvim.multicursor")
+  vim.api.nvim_buf_clear_namespace(0, namespace, 0, -1)
+end, { desc = "Clear Multicursors" })
+
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
@@ -35,7 +41,7 @@ map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+map("n", "<leader>bD", "<cmd>bd<cr>", { desc = "Delete Buffer and Window" })
 
 -- Clear search on escape
 map({ "i", "n", "s" }, "<esc>", function()
