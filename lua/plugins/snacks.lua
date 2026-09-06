@@ -1,3 +1,50 @@
+-- Keep state per terminal so numbered terminals can each be restored independently.
+local terminal_states = setmetatable({}, { __mode = "k" })
+
+local function restore_terminal(terminal, state)
+    vim.schedule(function()
+        if not terminal:valid() then
+            return
+        end
+
+        local is_current = vim.api.nvim_get_current_win() == terminal.win
+        if is_current and state and not state.terminal_mode then
+            vim.cmd.stopinsert()
+        end
+
+        if state then
+            pcall(vim.api.nvim_win_call, terminal.win, function()
+                vim.fn.winrestview(state.view)
+            end)
+        end
+
+        if is_current and (not state or state.terminal_mode) then
+            vim.cmd.startinsert()
+        end
+    end)
+end
+
+local function toggle_terminal()
+    local terminal, created = Snacks.terminal.get()
+    if created then
+        -- A new terminal should still start ready for input.
+        restore_terminal(terminal)
+        return
+    end
+
+    if terminal:valid() then
+        terminal_states[terminal] = {
+            terminal_mode = vim.api.nvim_get_current_win() == terminal.win
+                and vim.api.nvim_get_mode().mode:sub(1, 1) == "t",
+            view = vim.api.nvim_win_call(terminal.win, vim.fn.winsaveview),
+        }
+        terminal:hide()
+    else
+        terminal:show():focus()
+        restore_terminal(terminal, terminal_states[terminal])
+    end
+end
+
 return {
     {
         "folke/snacks.nvim",
@@ -35,8 +82,8 @@ return {
             { "<leader>sw",       function() Snacks.picker.grep_word() end,                               desc = "Word under Cursor",       mode = { "n", "x" } },
             { "<leader>uC",       function() Snacks.picker.colorschemes() end,                            desc = "Colorscheme with Preview" },
             -- terminal
-            { "<C-/>",            function() Snacks.terminal() end,                                       desc = "Terminal",                mode = { "n", "t" } },
-            { "<C-_>",            function() Snacks.terminal() end,                                       desc = "which_key_ignore",        mode = { "n", "t" } },
+            { "<C-/>",            toggle_terminal,                                                        desc = "Terminal",                mode = { "n", "t" } },
+            { "<C-_>",            toggle_terminal,                                                        desc = "which_key_ignore",        mode = { "n", "t" } },
             { "<leader>sn",       function() Snacks.notifier.show_history() end,                          desc = "Notification History" },
             { "<leader>ss",       function() Snacks.picker.lsp_symbols() end,                             desc = "Goto Symbol" },
             { "<leader>sS",       function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "Goto Symbol (Workspace)" },
@@ -53,7 +100,13 @@ return {
                     underline = false,
                 },
             },
-            terminal = { win = { wo = { winbar = "", winhighlight = "Normal:Normal" } } },
+            terminal = {
+                -- don't force insert mode on open/re-open; we handle mode +
+                -- scroll position restore ourselves (see toggle_terminal above)
+                start_insert = false,
+                auto_insert = false,
+                win = { wo = { winbar = "", winhighlight = "Normal:Normal" } },
+            },
             notifier = { enabled = true },
             input = { enabled = true },
             picker = {
