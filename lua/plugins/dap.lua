@@ -16,9 +16,16 @@ return {
       {
         "<leader>dc",
         function()
-          require("dap").continue()
+          require("config.dap-rust").continue()
         end,
-        desc = "Continue",
+        desc = "Continue / Debug",
+      },
+      {
+        "<leader>dT",
+        function()
+          require("config.dap-rust").debug_test()
+        end,
+        desc = "Debug Test",
       },
       {
         "<leader>db",
