@@ -43,19 +43,21 @@ return {
                 capabilities = capabilities,
             })
 
-            vim.lsp.config("pyrefly", {
-                cmd = { "pyrefly", "lsp" },
-                filetypes = { "python" },
-                root_markers = python_root_markers,
-                workspace_required = true,
+            vim.lsp.config("pyright", {
                 capabilities = capabilities,
-                on_exit = function(code)
-                    if code ~= 0 then
-                        vim.schedule(function()
-                            vim.notify("Pyrefly exited with code: " .. code, vim.log.levels.ERROR)
-                        end)
-                    end
-                end,
+                root_markers = python_root_markers,
+                settings = {
+                    pyright = {
+                        disableOrganizeImports = true,
+                    },
+                    python = {
+                        analysis = {
+                            autoSearchPaths = true,
+                            diagnosticMode = "openFilesOnly",
+                            useLibraryCodeForTypes = true,
+                        },
+                    },
+                },
             })
             vim.lsp.config("vtsls", {
                 capabilities = capabilities,
@@ -113,15 +115,13 @@ return {
                 capabilities = capabilities,
             })
 
-            vim.lsp.enable({ "clangd", "lua_ls", "pyrefly", "ruff", "rust_analyzer", "vtsls" })
+            vim.lsp.enable({ "clangd", "lua_ls", "pyright", "ruff", "rust_analyzer", "vtsls" })
 
             vim.diagnostic.config({
                 underline = true,
                 update_in_insert = false,
-                virtual_text = false,
-                virtual_lines = {
-                    overflow = "wrap",
-                },
+                virtual_text = true,
+                virtual_lines = false,
                 float = {
                     border = "rounded",
                     source = "if_many",

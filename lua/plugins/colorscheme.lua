@@ -1,28 +1,41 @@
+local soft_white = "#c8c8c8"
+
+-- Flip to false to go straight back to koda.
+local use_gruber_darker = false
+
+if not use_gruber_darker then
+    return {
+        {
+            "oskarnurm/koda.nvim",
+            lazy = false,
+            priority = 1000,
+            config = function()
+                require("koda").setup({
+                    transparent = false,
+                    colors = {
+                        dark = {
+                            border = "#4a4a4a",
+                            emphasis = "#d0d0d0",
+                            func = soft_white,
+                            string = soft_white,
+                            char = soft_white,
+                            special = soft_white,
+                        },
+                    },
+                })
+                vim.cmd.colorscheme("koda-dark")
+            end,
+        },
+    }
+end
+
 return {
     {
-        "webhooked/kanso.nvim",
+        "blazkowolf/gruber-darker.nvim",
         lazy = false,
         priority = 1000,
         config = function()
-            require("kanso").setup({
-                italics = false,
-                transparent = false,
-                dimInactive = false,
-                terminalColors = true,
-                minimal = true,
-                overrides = function(colors)
-                    return {
-                        ["@markup.italic"] = { italic = false },
-                        FloatBorder = { fg = colors.palette.gray5 },
-                        WinSeparator = { fg = colors.palette.gray5 },
-                    }
-                end,
-                background = {
-                    dark = "zen",
-                    light = "pearl",
-                },
-            })
-            vim.cmd.colorscheme("kanso-zen")
+            vim.cmd.colorscheme("gruber-darker")
         end,
     },
 }

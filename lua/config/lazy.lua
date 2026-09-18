@@ -18,7 +18,7 @@ require("lazy").setup({
     spec = {
         { import = "plugins" },
     },
-    install = { colorscheme = { "kanso-zen", "habamax" } },
+    install = { colorscheme = { "koda-dark", "habamax" } },
     checker = {
         enabled = false,
         notify = false,
