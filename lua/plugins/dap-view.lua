@@ -1,9 +1,6 @@
 return {
     {
         "igorlfs/nvim-dap-view",
-        dependencies = {
-            "mfussenegger/nvim-dap",
-        },
         keys = {
             { "<leader>du", "<cmd>DapViewToggle<cr>", desc = "Dap View" },
             { "<leader>dr", "<cmd>DapViewOpen<cr>",   desc = "Open Dap View" },

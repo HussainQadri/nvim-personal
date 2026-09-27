@@ -67,8 +67,6 @@ return {
       local dap = require("dap")
       local mason = vim.fn.stdpath("data") .. "/mason/packages"
 
-      require("mason-nvim-dap").setup()
-
       local function current_cwd()
         return vim.fn.getcwd()
       end
