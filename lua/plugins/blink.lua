@@ -2,13 +2,10 @@ return {
   {
     "saghen/blink.cmp",
     version = "1.*",
-    dependencies = { "rafamadriz/friendly-snippets", "onsails/lspkind.nvim" },
+    dependencies = { "rafamadriz/friendly-snippets" },
     event = { "InsertEnter", "CmdlineEnter" },
     config = function()
       require("blink.cmp").setup({
-        appearance = {
-          kind_icons = require("lspkind").symbol_map,
-        },
         sources = {
           default = { "lsp", "path", "snippets", "buffer" },
         },
