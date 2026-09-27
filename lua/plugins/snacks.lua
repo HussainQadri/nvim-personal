@@ -83,7 +83,7 @@ return {
             { "<leader>uC",       function() Snacks.picker.colorschemes() end,                            desc = "Colorscheme with Preview" },
             -- terminal
             { "<C-/>",            toggle_terminal,                                                        desc = "Terminal",                mode = { "n", "t" } },
-            { "<C-_>",            toggle_terminal,                                                        desc = "which_key_ignore",        mode = { "n", "t" } },
+            { "<C-_>",            toggle_terminal,                                                        desc = "Terminal",                mode = { "n", "t" } },
             { "<leader>sn",       function() Snacks.notifier.show_history() end,                          desc = "Notification History" },
             { "<leader>ss",       function() Snacks.picker.lsp_symbols() end,                             desc = "Goto Symbol" },
             { "<leader>sS",       function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "Goto Symbol (Workspace)" },
