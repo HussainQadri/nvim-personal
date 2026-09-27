@@ -1,5 +1,7 @@
 return {
   "mrjones2014/smart-splits.nvim",
+  -- tmux checks @pane-is-vim before forwarding the first navigation key.
+  lazy = false,
   keys = {
     {
       "<C-h>",
