@@ -1,7 +1,9 @@
 return {
   "nvim-mini/mini.pairs",
   version = "*",
-  event = "InsertEnter",
+  -- Set up before a picker prompt can claim <CR>/<BS> for its buffer.
+  -- mini.pairs only creates its global mappings if maparg() is empty.
+  lazy = false,
   config = function()
     require("mini.pairs").setup({
       mappings = {
