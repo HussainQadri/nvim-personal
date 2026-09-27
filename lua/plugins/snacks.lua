@@ -130,7 +130,7 @@ return {
             },
             explorer = {
                 enabled = true,
-                replace_netrw = false,
+                replace_netrw = true,
             },
             lazygit = {
                 enabled = true,
