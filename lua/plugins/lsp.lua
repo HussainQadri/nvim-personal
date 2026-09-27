@@ -5,18 +5,6 @@ return {
         opts = {},
     },
     {
-        "mason-org/mason-lspconfig.nvim",
-        cmd = { "LspInstall", "LspUninstall" },
-        dependencies = {
-            "mason-org/mason.nvim",
-            "neovim/nvim-lspconfig",
-        },
-        opts = {
-            -- Install servers explicitly with :Mason or :LspInstall.
-            ensure_installed = {},
-        },
-    },
-    {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
