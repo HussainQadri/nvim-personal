@@ -91,7 +91,7 @@ return {
             { "<leader>wz",       function() Snacks.zen.zoom() end,                                       desc = "Zoom" },
         },
         opts = {
-            bigfile = { enabled = true },
+            bigfile = { enabled = true, notify = false },
             indent = {
                 enabled = true,
                 animate = { enabled = false },
